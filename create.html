@@ -8,11 +8,15 @@
   <body>
 <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
 <img id="image" src=""/>
+<div id="line"></div>
+<div id="box"></div>
 <div id="title"></div>
 <script>
   grist.ready({requiredAccess: 'read table'});
   grist.onRecord(function (record) {
-    document.getElementById('image').innerText = record.Image;
+    document.getElementById('image').src = record.Image;
+    document.getElementById('line').innerText = record.Line;
+    document.getElementById('box').innerText = record.Box;
     document.getElementById('title').innerText = record.Title;
   });
 </script>
