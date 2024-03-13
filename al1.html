@@ -15,20 +15,21 @@
 <div id="box"></div>
 <script>
   grist.ready({requiredAccess: 'read table'});
+/*
   grist.onRecord(function (record) {
     document.getElementById('image').src = record.Image;
     document.getElementById('line').innerText = record.Line;
     document.getElementById('box').innerText = record.Box;
   });
-    async function example(cmd) {
-    grist.onRecord((data) => cmd.output(data));
-    return "Added. Now change a cursor position in a table and observe the result.";
+*/
+    async function example() {
+        return grist.onRecord(function(record) {return record.Title} );
     }
-//  function getTitle(){ return record.Title;
+    //  function getTitle(){ return record.Title;
 //};
 </script>
 
-<div x-data="{ title: '' }" x-init="example(title)">
+<div x-data="{ title: '' }" x-init="title = example()">
     <span>Title</span>
     <span x-text="title"></span>
 </div>
