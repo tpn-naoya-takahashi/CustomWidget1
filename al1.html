@@ -20,11 +20,15 @@
     document.getElementById('line').innerText = record.Line;
     document.getElementById('box').innerText = record.Box;
   });
-  function getTitle(){ return record.Title;
-};
+    async function example(cmd) {
+    grist.onRecord((data) => cmd.output(data));
+    return "Added. Now change a cursor position in a table and observe the result.";
+    }
+//  function getTitle(){ return record.Title;
+//};
 </script>
 
-<div x-data="{ title: '' }" x-init="title = getTitle()">
+<div x-data="{ title: '' }" x-init="example(title)">
     <span>Title</span>
     <span x-text="title"></span>
 </div>
