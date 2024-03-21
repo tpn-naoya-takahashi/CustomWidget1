@@ -18,10 +18,10 @@
       this.box = record.Box;
       this.title = record.Title;
     });">
-      <img :src="image" alt="">
-      <div id="line">{{ line }}</div>
-      <div id="box">{{ box }}</div>
-      <div id="title">{{ title }}</div>
+      <img src="image" alt="">
+      <div x-text="line"></div>
+      <div x-text="box"></div>
+      <div x-text="title"></div>
     </div>
   </body>
 </html>
