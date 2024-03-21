@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>onRecords</title>
+    <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+  <body>
+    <div x-data="{
+      image: '',
+      line: '',
+      box: '',
+      title: ''
+    }" x-init="grist.ready({requiredAccess: 'read table'}); grist.onRecord((record) => {
+      this.image = record.Image;
+      this.line = record.Line;
+      this.box = record.Box;
+      this.title = record.Title;
+    });">
+      <img :src="image" alt="">
+      <div id="line">{{ line }}</div>
+      <div id="box">{{ box }}</div>
+      <div id="title">{{ title }}</div>
+    </div>
+  </body>
+</html>
