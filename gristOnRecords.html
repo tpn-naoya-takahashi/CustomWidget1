@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang=ja>
+  <head>
+    <meta charset="utf-8">
+    <title>onRecord</title>
+    <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+  <body>
+    <div x-data="{
+      readout: 'Waiting for data...',
+      init() {
+        grist.ready({requiredAccess: 'read table'});
+        grist.onRecords(records => {
+          this.title = JSON.stringify(records, null, 2);;
+        });
+      }
+    }">
+      <pre x-text="readout"></pre>
+    </div>
+  </body>
+</html>
