@@ -12,7 +12,7 @@
       init() {
         grist.ready({requiredAccess: 'read table'});
         grist.onRecords(records => {
-          this.title = JSON.stringify(records, null, 2);;
+          this.readout = JSON.stringify(records, null, 2);;
         });
       }
     }">
