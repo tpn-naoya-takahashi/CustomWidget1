@@ -13,10 +13,14 @@
         grist.ready({requiredAccess: 'read table'});
         grist.onRecord(record => {
           this.title = record.Title;
+          this.line = record.Line;
+          this.box = record.Box;
         });
       }
     }">
       <pre x-text="title"></pre>
+      <pre x-text="line"></pre>
+      <pre x-text="box"></pre>
     </div>
   </body>
 </html>
