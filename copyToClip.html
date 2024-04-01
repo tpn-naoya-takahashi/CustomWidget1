@@ -48,16 +48,19 @@
   </head>
   <body>
     <div class="content" x-data="{
-    	btnMes: 'Copy Text',
+      btnMes: 'Copy Text',
 	    tex: '',
 	    showErrMes: false,
 	    errMes: 'Select a column to copy using the Creator Panel.',
 	    async copyToClipboard() { await navigator.clipboard.writeText(this.tex); } ,
+
       init() {
         function firstColumn(record) {
           return record ? record[Object.keys(record).filter(k => k !== 'id')[0]] : undefined;
         };
-        grist.ready({columns: ["Column"]});
+        grist.ready({
+          columns: ['Column']
+        });
         grist.on('message', (e) => {
           if (e.tableId) { tableId = e.tableId; }
         });
@@ -68,11 +71,11 @@
             showError(showErrMes = true);
           } else {
             showError(showErrMes = false);
-//            showData(value);
-              this.tex = value;
+            this.tex = value;
           }
         }
-      );,
+
+      };,
 	  }">
 
       <button id="copy" x-text="btnMes" @click="copyToClipboard(), btnMes = 'Copied'"></button>
