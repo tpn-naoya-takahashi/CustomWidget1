@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Copy To Clipboard</title>
+    <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+      html, body {
+          padding: 0px;
+          margin: 0px;
+      }
+      #error {
+          display: none;
+          background: red;
+          color: white;
+          padding: 20px;
+          text-align: center;
+      }
+      textarea {
+          flex: 1;
+          box-sizing: border-box;
+      }
+      button {
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 8px;
+      }
+      button:hover {
+          background-color: #40A000;
+      }
+      .content {
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+          padding: 20px;
+      }
+      .content div, .content button, .content textarea {
+          margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content" x-data="{
+    	btnMes: 'Copy Text',
+	    tex: '',
+	    showErrMes: false,
+	    errMes: 'Select a column to copy using the Creator Panel.',
+	    async copyToClipboard() { await navigator.clipboard.writeText(this.tex); } ,
+      init() {
+        function firstColumn(record) {
+          return record ? record[Object.keys(record).filter(k => k !== 'id')[0]] : undefined;
+        };
+        grist.ready({columns: ["Column"]});
+        grist.on('message', (e) => {
+          if (e.tableId) { tableId = e.tableId; }
+        });
+        grist.onRecords(function(record) {
+          const mapped = grist.mapColumnNames(record);
+          const value = mapped?.Column ?? firstColumn(record);
+          if (value === undefined) {
+            showError(showErrMes = true);
+          } else {
+            showError(showErrMes = false);
+//            showData(value);
+              this.tex = value;
+          }
+        }
+      );,
+	  }">
+
+      <button id="copy" x-text="btnMes" @click="copyToClipboard(), btnMes = 'Copied'"></button>
+      <textarea id="textArea" x-model="tex"></textarea>
+
+      <div id="error" x-text="errMes" x-show='showErrMes'></div>
+
+    </div>
+  </body>
+</html>
