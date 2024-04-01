@@ -11,8 +11,7 @@
     <div class="content" x-data="{
       btnMes: 'Copy Text',
 	    tex: '',
-	    showErrMes: true,
-	    errMes: 'Select a column to copy using the Creator Panel.',
+	    showErrMes: false,
 	    async copyToClipboard() { await navigator.clipboard.writeText(this.tex); console.log('Copied to clipboard!'); } ,
 
       init() {        
