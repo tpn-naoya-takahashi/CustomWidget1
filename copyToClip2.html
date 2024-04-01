@@ -13,7 +13,7 @@
 	    tex: '',
 	    showErrMes: true,
 	    errMes: 'Select a column to copy using the Creator Panel.',
-	    async copyToClipboard() { await navigator.clipboard.writeText(this.tex); } ,
+	    async copyToClipboard() { await navigator.clipboard.writeText(this.tex); console.log('Copied to clipboard!'); } ,
 
       init() {},
 	  }">
