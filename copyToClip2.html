@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Copy To Clipboard</title>
+    <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+ </head>
+  <body>
+    <div class="content" x-data="{
+      btnMes: 'Copy Text',
+	    tex: '',
+	    showErrMes: true,
+	    errMes: 'Select a column to copy using the Creator Panel.',
+	    async copyToClipboard() { await navigator.clipboard.writeText(this.tex); } ,
+
+      init() {},
+	  }">
+
+      <button id="copy" x-text="btnMes" class="bg-green-900 hover:bg-red-800 text-white rounded px-4 py-2"   @click="copyToClipboard(), btnMes = 'Copied'"></button>
+      
+      <textarea id="textArea" class="bg-yellow-700 hover:bg-red-800 text-white rounded px-4 py-2" x-model="tex"></textarea>
+
+      <div id="error" x-show='showErrMes' class="bg-amber-200 w-1/12 " >Select a column to copy using the Creator Panel.</div>
+
+    </div>
+  </body>
+</html>
